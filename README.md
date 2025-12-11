@@ -7,7 +7,7 @@ A lightweight and fast ToDo list application written in Python with system tray 
 ![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)
 
 ## Disclaimer
-UI is horrible I know. I'll work on this.
+This is a test ! UI is horrible, I'll fix this ASAP
 
 ## ✨ Features
 

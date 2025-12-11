@@ -3,15 +3,19 @@ import os
 import json
 import threading as th
 import tkinter as tk
+from tkinter.messagebox import showinfo
 import pystray as pys
 from PIL import Image
 
+LOGO_FILE = './logo.png'
+TODO_FILE = '~/.todoit/todo_items.json'
+
 window = tk.Tk()
+window.title('ToDoIt')
+window.iconphoto(False, tk.PhotoImage(file=LOGO_FILE))
 window.withdraw()
 
 system_tray_image = Image.open('logo.png')
-
-TODO_FILE = '~/.todoit/todo_items.json'
 
 
 def close_app():
@@ -109,6 +113,15 @@ def refresh_todo_list():
         delete_btn.pack(side=tk.RIGHT)
 
 
+def show_infos():
+    """Show an about alert dialog"""
+    showinfo(
+        title='À propos de ToDoIt',
+        message='ToDoIt v0.1\n\n' \
+        'Une application simple de liste de tâches avec intégration système pour Xfce.' \
+        '\n\nDéveloppé par Thekorzeremi.'
+    )
+
 icon = pys.Icon(
     name='ToDoIt',
     icon=system_tray_image,
@@ -118,7 +131,7 @@ icon = pys.Icon(
             open_app
         ),
         pys.MenuItem(
-            'Quitter l\'application',
+            'Quitter',
             quit_app
         )
     )
@@ -134,12 +147,29 @@ menu1 = tk.Menu(
     tearoff=0
 )
 menu1.add_command(
-    label='Quitter',
+    label='Fermer',
     command=close_app
+)
+menu1.add_command(
+    label='Quitter',
+    command=lambda: quit_app(icon)
 )
 menuBar.add_cascade(
     label='Fichier',
     menu=menu1
+)
+
+menu2 = tk.Menu(
+    menuBar,
+    tearoff=0
+)
+menu2.add_command(
+    label='À propos',
+    command=show_infos
+)
+menuBar.add_cascade(
+    label='Aide',
+    menu=menu2
 )
 
 main_frame = tk.Frame(window)
@@ -180,4 +210,5 @@ refresh_todo_list()
 th.Thread(target=icon.run, daemon=True).start()
 
 window.config(menu=menuBar)
+window.protocol('WM_DELETE_WINDOW', close_app)
 window.mainloop()
