@@ -40,7 +40,7 @@ chmod +x *.sh
 
 3. Launch install.sh
 ```bash
-./launch.sh
+./install.sh
 ```
 
 4. To uninstall:
