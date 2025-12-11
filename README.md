@@ -7,7 +7,7 @@ A lightweight and fast ToDo list application written in Python with system tray 
 ![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)
 
 ## Disclaimer
-UI is horrible I know
+UI is horrible I know. I'll work on this.
 
 ## ✨ Features
 
@@ -30,24 +30,44 @@ UI is horrible I know
 1. Clone the repository:
 ```bash
 git clone https://github.com/Thekorzeremi/todoit.git
-cd todoit
+cd todoit/scripts
 ```
 
-2. Install dependencies:
+2. Please make scripts executable:
 ```bash
-pip install pystray Pillow
+chmod +x *.sh
 ```
 
-3. Make sure you have a `logo.png` file in the project directory for the system tray icon.
+3. Launch install.sh
+```bash
+./launch.sh
+```
+
+4. To uninstall:
+```bash
+./remove.sh
+```
+
+## Manage application process
+A. To start:
+```bash
+./start.sh
+``` 
+
+B. To stop:
+```bash
+./stop.sh
+```
+
+C. To launch it on session start:
+```bash
+crontab -e
+@reboot <DIRECTORY_PATH>/scripts/start.sh
+```
 
 ## 💻 Usage
 
-Run the application:
-```bash
-python app.py
-```
-
-The application will start minimized in the system tray. Click the tray icon to access:
+The application will start minimized in the system tray when started. Click the tray icon to access:
 - **Ouvrir l'application** - Show the main window
 - **Quitter l'application** - Close the application
 
